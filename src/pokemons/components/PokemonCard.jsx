@@ -2,6 +2,7 @@ import { Card, Grid, CardContent, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { TypesPokemon } from "./TypesPokemon";
+import { UpperFirstLetter } from "../../ui/helpers/UpperFirstLetter";
 
 export const PokemonCard = ({ pokemon }) => {
   return (
@@ -17,7 +18,7 @@ export const PokemonCard = ({ pokemon }) => {
         <Link to={`pokemon/${pokemon?.id}`}>
           <img
             src={pokemon?.sprites?.other?.home?.front_default}
-            alt={pokemon?.name}
+            alt={pokemon?.name.toUpperCase()}
             width={"300px"}
           />
         </Link>
@@ -28,7 +29,7 @@ export const PokemonCard = ({ pokemon }) => {
           </Typography>
           <Link to={`pokemon/${pokemon.id}`}>
             <Typography gutterBottom variant="h5" component="div">
-              {pokemon?.name}
+              {UpperFirstLetter(pokemon.name)}
             </Typography>
           </Link>
           <TypesPokemon types={pokemon?.types} />

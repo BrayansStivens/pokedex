@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import { Container } from "@mui/material";
+
 import { getPokemonById } from "../helpers/PokemonsService";
-import { Container, Grid } from "@mui/material";
-import { PokemonCard } from "../components";
+import { TypesPokemon } from "../components";
+import Loading from "../../ui/components/Loading";
+import { UpperFirstLetter } from "../../ui/helpers/UpperFirstLetter";
+import { PokemonDetails } from "../components/PokemonDetails";
 
 export const PokemonPage = () => {
   const { id } = useParams();
@@ -10,21 +14,19 @@ export const PokemonPage = () => {
   const [pokemon, setPokemon] = useState({});
   const [loading, SetLoading] = useState(true);
 
-  const getPokemon = async (id) => {
+  const fetchPokemonById = async (id) => {
     const response = await getPokemonById(id);
     setPokemon(response);
-    console.log(response);
+    SetLoading(false);
   };
 
   useEffect(() => {
-    getPokemon(id);
+    fetchPokemonById(id);
   }, []);
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: "1.75rem" }}>
-      <Grid container spacing={12}>
-        <PokemonCard pokemon={pokemon}></PokemonCard>
-      </Grid>
+      {loading ? <Loading /> : <PokemonDetails pokemon={pokemon} />}
     </Container>
   );
 };

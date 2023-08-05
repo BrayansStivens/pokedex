@@ -1,6 +1,5 @@
-import { AppBar, Toolbar, InputBase, Box, IconButton } from "@mui/material";
+import { AppBar, Toolbar, InputBase, Box, styled, alpha } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { styled, alpha } from "@mui/material/styles";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/pokedex_logo.png";
 import { useForm } from "../../hooks/useForm";
@@ -63,15 +62,9 @@ export const NavBar = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <IconButton
-              sx={{
-                width: "auto",
-              }}
-            >
-              <NavLink to={"/"}>
-                <img src={logo} alt="pokedex" width={"150px"} height={"55px"} />
-              </NavLink>
-            </IconButton>
+            <NavLink to={"/"}>
+              <img src={logo} alt="pokedex" width={"150px"} height={"55px"} />
+            </NavLink>
 
             <form onSubmit={onSearchSubmit}>
               <Search>
